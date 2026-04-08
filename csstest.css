@@ -1,13 +1,13 @@
 body {
     margin: 0;
     padding: 20px;
-    background-color: #efd4ab;
+    background-color: #f2ddbd;
 }
 
 #headerRectangle {
     width: 100%;
     height: 175px;
-    background-color: rgb(83, 83, 234);
+    background-color: 5E7AC4;
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -39,7 +39,7 @@ body {
     position: relative;
     width: 80%;
     height: 300px;
-    background-color: palegoldenrod;
+    background-color: F3BE7A;
     border-radius: 15px;
     justify-content: center;
     align-items: flex-start;
@@ -110,7 +110,7 @@ body {
 #managerDashboardHeader {
     width: 100%;
     height: 175px;
-    background-color: rgb(83, 83, 234);
+    background-color: 5E7AC4;
     border-radius: 15px;
     padding-bottom: 20px;
     display: flex;
@@ -137,7 +137,7 @@ body {
     width: 60%; 
     max-width: 900px; 
     height: 120px; 
-    background-color: palegoldenrod;
+    background-color: F3BE7A;
     border-radius: 15px;
     justify-content: center;
     text-align: center;
@@ -151,7 +151,7 @@ body {
 #requestManagerMeeting:hover,
 #viewPerformance:hover,
 #requestResignation:hover {
-    background-color: rgb(253, 228, 0);
+    background-color: F08D39;
     transform: scale(1.02);
     transition: 0.2s;
     cursor: pointer;
@@ -193,7 +193,7 @@ a {
     width: 80%;
     height: 300px;
    
-    background-color: palegoldenrod;
+    background-color: F3BE7A;
     border-radius: 15px;
     justify-content: center;
     align-items: center;
