@@ -13,27 +13,35 @@
             <div id="employeeLoginRectangle">
                 <div contenteditable="true", id ="employeeUsername"><p>Username: </p></div>
                 <div contenteditable="true", id ="employeePassword"><p>Password: </p></div> 
-                
-                <a href="employeeDashboard.html">
-                    <button id="employeeLoginButton">Login</button>
-                </a>
+
+                <button id="employeeLoginButton">Login</button>
+
                 
                 <p>Employee Login</p>
             </div>  
         </div>
         <div class="column">
             <div id="managerLoginRectangle">
-                <div contenteditable="true", id ="managerUsername"><p>Username: </p></div>
-                <div contenteditable="true", id ="managerPassword"><p>Password: </p></div>
+                <div contenteditable="true" id ="managerUsername"><p>Username: </p></div>
+                <div contenteditable="true" id ="managerPassword"><p>Password: </p></div>
                 
-                <a href="managerDashboard.html">
-                    <button id="managerLoginButton">Login</button>
-                </a>
+
+                <button id="managerLoginButton">Login</button>
+
 
                 <p>Manager Login</p>
             </div>        
         </div>
     </div>
-</a>
 </body>
 </html>
+
+<script>
+document.getElementById("employeeLoginButton").onclick = function() {
+    window.location.href = "employeeDashboard.html";
+};
+
+document.getElementById("managerLoginButton").onclick = function() {
+    window.location.href = "managerDashboard.html";
+};
+</script>
