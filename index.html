@@ -28,7 +28,9 @@
             </div>        
         </div>
     </div>
-    <script>
+<script>
+   document.getElementById("employeeLoginButton").onclick = function() {
+
         const username = document.getElementById("employeeUsername").innerText.trim();
         const password = document.getElementById("employeePassword").innerText.trim();
 
@@ -38,7 +40,7 @@
         else {
             alert("Incorrect username or password.")
         }
-
+    };
         document.getElementById("employeeLoginButton").onclick = function() {
             window.location.href = "employeeDashboard.html";
         };
@@ -47,7 +49,7 @@
             window.location.href = "managerDashboard.html";
         };
 
-    </script>
+</script>
 
 </body>
 </html>
