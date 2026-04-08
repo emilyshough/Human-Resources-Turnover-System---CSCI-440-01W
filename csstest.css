@@ -146,6 +146,17 @@
     font-size: 20px;
 }
 
+#employeeUpdateInfo {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    width: 80%;
+}
+
 .managerDashboardColumn {
     display: flex;
     flex-direction: column;
