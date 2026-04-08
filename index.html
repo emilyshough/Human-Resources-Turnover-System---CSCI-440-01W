@@ -11,12 +11,9 @@
     <div class="login-container">  
         <div class="column">   
             <div id="employeeLoginRectangle">
-                <div contenteditable="true", id ="employeeUsername"><p>Username: </p></div>
-                <div contenteditable="true", id ="employeePassword"><p>Password: </p></div> 
-
+                <input type="text" id ="employeeUsername"><p>Username: </p></div>
+                <input type="password" id ="employeePassword"><p>Password: </p></div> 
                 <button id="employeeLoginButton">Login</button>
-
-                
                 <p>Employee Login</p>
             </div>  
         </div>
@@ -24,8 +21,6 @@
             <div id="managerLoginRectangle">
                 <div contenteditable="true" id ="managerUsername"><p>Username: </p></div>
                 <div contenteditable="true" id ="managerPassword"><p>Password: </p></div>
-                
-
                 <button id="managerLoginButton">Login</button>
 
 
@@ -44,4 +39,11 @@ document.getElementById("employeeLoginButton").onclick = function() {
 document.getElementById("managerLoginButton").onclick = function() {
     window.location.href = "managerDashboard.html";
 };
+
+if(username === "1234" && password === "password"){
+    window.location.href = "employeeDashboard.html";
+}
+else {
+    alert("Incorrect username or password.")
+}
 </script>
