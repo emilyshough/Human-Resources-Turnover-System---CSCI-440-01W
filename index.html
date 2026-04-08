@@ -28,22 +28,27 @@
             </div>        
         </div>
     </div>
+    <script>
+        const username = document.getElementById("employeeUsername").innerText.trim();
+        const password = document.getElementById("employeePassword").innerText.trim();
+
+        if(username === "1234" && password === "password"){
+            window.location.href = "employeeDashboard.html";
+        }
+        else {
+            alert("Incorrect username or password.")
+        }
+
+        document.getElementById("employeeLoginButton").onclick = function() {
+            window.location.href = "employeeDashboard.html";
+        };
+
+        document.getElementById("managerLoginButton").onclick = function() {
+            window.location.href = "managerDashboard.html";
+        };
+
+    </script>
+
 </body>
 </html>
 
-<script>
-document.getElementById("employeeLoginButton").onclick = function() {
-    window.location.href = "employeeDashboard.html";
-};
-
-document.getElementById("managerLoginButton").onclick = function() {
-    window.location.href = "managerDashboard.html";
-};
-
-if(username === "1234" && password === "password"){
-    window.location.href = "employeeDashboard.html";
-}
-else {
-    alert("Incorrect username or password.")
-}
-</script>
