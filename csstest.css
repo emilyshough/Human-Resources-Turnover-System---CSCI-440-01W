@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 20px;
-    background-color: #f9ce8f;
+    background-color: #efd4ab;
 }
 
 #headerRectangle {
@@ -137,7 +137,7 @@ body {
     width: 60%; 
     max-width: 900px; 
     height: 120px; 
-    background-color: khaki;
+    background-color: palegoldenrod;
     border-radius: 15px;
     justify-content: center;
     text-align: center;
