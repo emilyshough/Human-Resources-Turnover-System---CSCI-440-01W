@@ -154,6 +154,10 @@ body {
     transform: scale(1.02);
     transition: 0.2s;
     cursor: pointer;
+    text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
 
 a {
@@ -162,6 +166,10 @@ a {
     width: 80%;
     display: flex;
     justify-content: center;
+        text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
 
 .managerDashboardColumn {
