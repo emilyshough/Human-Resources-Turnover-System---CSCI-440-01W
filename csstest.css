@@ -151,6 +151,7 @@ body {
 #requestManagerMeeting:hover,
 #viewPerformance:hover,
 #requestResignation:hover {
+    background-color: rgb(253, 228, 0);
     transform: scale(1.02);
     transition: 0.2s;
     cursor: pointer;
@@ -163,10 +164,10 @@ body {
 a {
     text-decoration: none;
     color: black;
-    width: 80%;
+    width: 60%;
     display: flex;
     justify-content: center;
-        text-align: center;
+    text-align: center;
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
