@@ -28,7 +28,7 @@
     </div>
 <script>
 window.users = [];
-    fetch("/workspaces/Human-Resources-Turnover-System---CSCI-440-01W/login_info - Sheet1.csv")
+    fetch("https://raw.githubusercontent.com/emilyshough/Human-Resources-Turnover-System---CSCI-440-01W/bb19d3644c00a17419b73d8a02189b40dc219a6b/login_info%20-%20Sheet1.csv")
     .then(response => response.text())
     .then(data => {
         const rows = data.split("\n").slice(1);
