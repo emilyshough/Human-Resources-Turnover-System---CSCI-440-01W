@@ -8,6 +8,7 @@
         <div id="employeeDashboardHeader">
             <p>Employee Dashboard</p>
         </div>
+        <p id="welcomeMessageEmployee"></p>
         <div class="employeeDashboardColumn">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdftc-BGL-f7YycV6g8ShgWwsEodOhxoAnhERDloqjR5skORw/viewform">
                 <div id="employeeUpdateInfo">
@@ -31,5 +32,14 @@
                 <p>Request Resignation</p>
             </div>
         </div>
+        <script>
+        const loggedInEmployee = sessionStorage.getItem("loggedInEmployee");
+
+        if (!loggedInEmployee) {
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("welcomeMessage").innerText = "Welcome, " + loggedInEmployee + "!";
+        </script>
     </body>
 </html>
