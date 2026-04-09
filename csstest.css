@@ -121,6 +121,7 @@ body {
     border-radius: 15px;
     padding-bottom: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
@@ -130,9 +131,8 @@ body {
 #welcomeMessageManager,
 #welcomeMessageEmployee {
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
-    padding-top: 160px;
 }
 
 .employeeDashboardColumn {
