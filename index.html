@@ -40,9 +40,18 @@
         }
     };
 
-        document.getElementById("managerLoginButton").onclick = function() {
+    document.getElementById("managerLoginButton").onclick = function() {
+        const username = document.getElementById("managerUsername").innerText.trim();
+        const password = document.getElementById("managerPassword").innerText.trim();
+        
+        if(username === "admin" && password === "bestmanagerever"){
             window.location.href = "managerDashboard.html";
-        };
+        }
+        else {
+            alert("Incorrect username or password.")
+        }
+    
+    };
 
 </script>
 
