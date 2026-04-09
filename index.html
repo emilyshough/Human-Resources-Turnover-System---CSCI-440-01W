@@ -62,13 +62,6 @@
         }
         
     };
-    const loggedInManager = sessionStorage.getItem("loggedInManager");
-
-    if (!loggedInManager) {
-        window.location.href = "index.html";
-    }
-
-    document.getElementById("welcomeMessage").innerText = "Welcome, " + loggedInManager + "!";
 
     window.managerUsers = [];
     fetch("https://raw.githubusercontent.com/emilyshough/Human-Resources-Turnover-System---CSCI-440-01W/main/manager_login_info%20-%20Sheet1.csv")

@@ -8,6 +8,7 @@
         <div id="managerDashboardHeader">
             <p>Manager Dashboard</p>
         </div>
+        <p id="welcomeMessage"></p>
         <div class="managerDashboardColumn">
             <div id="conductExitInterview">
                 <p>Conduct Exit Interview</p>
@@ -29,6 +30,14 @@
                 <p>Update Employee Records</p>
             </div>
         </div>
-    
+    <script>
+        const loggedInManager = sessionStorage.getItem("loggedInManager");
+
+        if (!loggedInManager) {
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("welcomeMessage").innerText = "Welcome, " + loggedInManager + "!";
+    </script>
     </body>
 </html>
