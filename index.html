@@ -57,14 +57,13 @@
     });
 
     document.getElementById("managerLoginButton").onclick = function() {
+        const username = document.getElementById("managerUsername").value.trim();
+        const password = document.getElementById("managerPassword").value.trim();
 
         if (!window.users || window.users.length === 0) {
             alert("User data not loaded yet. Try again.");
             return;
         }
-
-        const username = document.getElementById("managerUsername").innerText.trim();
-        const password = document.getElementById("managerPassword").innerText.trim();
 
         const validUser = window.users.find(user =>
             user.username === username && user.password === password
@@ -73,7 +72,7 @@
         if(validUser) {
             window.location.href = "managerDashboard.html";
         } else {
-            alert("Incorrect username or password.")
+            alert("Incorrect username or password.");
         }
         
     };
