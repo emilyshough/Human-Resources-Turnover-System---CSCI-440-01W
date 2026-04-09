@@ -114,7 +114,8 @@ body {
 }
 
 #employeeDashboardHeader,
-#managerDashboardHeader {
+#managerDashboardHeader,
+#turnoverReportHeader {
     width: 100%;
     height: 175px;
     background-color: rgb(94, 122, 196);
