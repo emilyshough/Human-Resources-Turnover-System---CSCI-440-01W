@@ -27,6 +27,16 @@
         </div>
     </div>
 <script>
+    fetch("login_info.csv")
+    .then(response => response.text())
+    .then(data => {
+        const rows = data.split("\n").slice(1);
+        window.users = rows.map(row => {
+            const [username, password] = row.split(",");
+            return { username, password };
+        });
+    });
+
    document.getElementById("employeeLoginButton").onclick = function() {
 
         const username = document.getElementById("employeeUsername").innerText.trim();
@@ -44,12 +54,16 @@
         const username = document.getElementById("managerUsername").innerText.trim();
         const password = document.getElementById("managerPassword").innerText.trim();
 
-        if(username === "admin" && password === "bestmanagerever"){
+        const validUser = window.users.find(user =>
+            user.username === username && user.password === password
+        );
+
+        if(validUser) {
             window.location.href = "managerDashboard.html";
-        }
-        else {
+        } else {
             alert("Incorrect username or password.")
         }
+        
     
     };
 
