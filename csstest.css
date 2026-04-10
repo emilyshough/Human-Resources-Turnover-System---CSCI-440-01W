@@ -237,8 +237,9 @@ a {
 
 /*Conduct Exit Interview Styling*/
 .todoListColumn {
-    height: 40%;
+    height: 400px;
     width: 80%;
+    padding: 20px;
     background-color: rgb(243, 190, 122);
     border-radius: 15px;
     justify-content: center;
