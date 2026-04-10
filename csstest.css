@@ -198,7 +198,6 @@ a {
     align-items: center;   
     margin-top: 20px;     
     width: 100%;
-   
     gap: 20px;
 }
 
@@ -237,13 +236,15 @@ a {
 }
 
 /*Conduct Exit Interview Styling*/
-#todoListColumn {
+.todoListColumn {
     height: 40%;
     width: 80%;
-     background-color: rgb(243, 190, 122);
+    background-color: rgb(243, 190, 122);
     border-radius: 15px;
     justify-content: center;
     text-align: center;
+    align-items: center;
+    flex-direction: column;
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
