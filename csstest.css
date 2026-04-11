@@ -270,7 +270,6 @@ a {
     align-self: flex-start;
     width: auto;        
     display: inline;
-    padding-bottom: 10px;
 }
 
 #dashboard:hover {
