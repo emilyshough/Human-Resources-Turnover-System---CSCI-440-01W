@@ -259,3 +259,12 @@ a {
     gap: 10px;
     margin-bottom: 12px;
 }
+
+/*Dashboard home button*/
+#dashboard {
+    background-color: darkgray;
+}
+
+#dashboard:hover {
+    background-color: black;
+}
