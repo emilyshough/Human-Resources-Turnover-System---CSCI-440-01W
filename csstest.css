@@ -262,9 +262,15 @@ a {
 
 /*Dashboard home button*/
 #dashboard {
-    background-color: darkgray;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
 }
 
 #dashboard:hover {
-    background-color: black;
+    text-decoration: bold;
+    color: white;
 }
