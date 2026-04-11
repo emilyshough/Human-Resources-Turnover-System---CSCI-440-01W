@@ -268,9 +268,11 @@ a {
     font-size: 16px;
     color: white;
     text-decoration: none;
+    width: auto;        
+    display: inline;
 }
 
 #dashboard:hover {
-    text-decoration: bold;
+    text-decoration: underline;
     color: white;
 }
