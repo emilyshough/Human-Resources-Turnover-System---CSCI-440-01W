@@ -262,11 +262,10 @@ a {
 
 /*Dashboard home button*/
 #dashboard {
-    position: absolute;
     top: 15px;
     left: 20px;
     font-size: 16px;
-    color: white;
+    color: black;
     text-decoration: none;
     width: auto;        
     display: inline;
