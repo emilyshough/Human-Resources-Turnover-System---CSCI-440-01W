@@ -28,13 +28,16 @@ app.get('/', (req, res) => {
 
 // 
 app.get('/users', (req, res) => {
-    db.query('SELECT * FROM users', (err, result) => {
+    db.query(`
+        SELECT 
+            EmployeeID,
+            Email AS username,
+            '1234' AS password
+        FROM employee
+    `, (err, result) => {
         if (err) {
-            console.log("MYSQL ERROR:", err); 
-            return res.status(500).json({
-                fatal: true,
-                error: err.message
-            });
+            console.log("MYSQL ERROR:", err);
+            return res.status(500).json({ fatal: true, error: err.message });
         }
         res.json(result);
     });
