@@ -45,15 +45,17 @@ document.getElementById("employeeLoginButton").onclick = async function () {
     });
 
     if (res.ok) {
-    const data = await res.json();
-    if (data.role === "manager") {
-        sessionStorage.setItem("loggedInManager", data.username);
-        window.location.href = "managerDashboard.html";
+        const data = await res.json();
+        if (data.role === "manager") {
+            sessionStorage.setItem("loggedInManager", data.username);
+            window.location.href = "managerDashboard.html";
+        } else {
+            sessionStorage.setItem("loggedInEmployee", data.username);
+            window.location.href = "employeeDashboard.html";
+        }
     } else {
-        sessionStorage.setItem("loggedInEmployee", data.username);
-        window.location.href = "employeeDashboard.html";
+        alert("Incorrect username or password.");  
     }
-}
 };
 
 // Manager Login
@@ -68,12 +70,16 @@ document.getElementById("managerLoginButton").onclick = async function () {
     });
 
     if (res.ok) {
-        const data = await res.json();
+    const data = await res.json();
+    if (data.role === "manager") {
         sessionStorage.setItem("loggedInManager", data.username);
         window.location.href = "managerDashboard.html";
     } else {
-        alert("Incorrect username or password.");
+        alert("You do not have manager access.");
     }
+} else {
+    alert("Incorrect username or password.");
+}
 };
 </script>
 
