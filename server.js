@@ -6,12 +6,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+console.log({
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT
+});
+
 const db = mysql.createPool({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
     password: process.env.MYSQLPASSWORD,
     database: process.env.MYSQLDATABASE,
-    port: process.env.MYSQLPORT,
+    port: Number(process.env.MYSQLPORT),
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -27,8 +34,7 @@ app.get('/users', (req, res) => {
     db.query(`
         SELECT 
             EmployeeID,
-            Email AS username,
-            '1234' AS password
+            Email AS username
         FROM employee
     `, (err, result) => {
         if (err) {
@@ -39,18 +45,7 @@ app.get('/users', (req, res) => {
     });
 });
 // 
-app.post('/users', (req, res) => {
-    const { username, password } = req.body;
 
-    const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
-    db.query(sql, [username, password], (err, result) => {
-        if (err) {
-            res.status(500).send(err);
-            return;
-        }
-        res.send('User added!');
-    });
-});
 
 const PORT = process.env.PORT || 3000;
 
