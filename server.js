@@ -42,30 +42,30 @@ app.get('/users', (req, res) => {
 }); // 
 
 // Login Route
-app.post("/users/login", async (req, res) => {
+app.post("/users/login", (req, res) => {
     const { username, password } = req.body;
-    
+
     console.log("Received username:", username);
     console.log("Received password:", password);
-    console.log("Password type:", typeof password);
 
-    const [rows] = await db.execute(
+    db.query(
         "SELECT FirstName, EmployeeID FROM employee WHERE FirstName = ?",
-        [username]
+        [username],
+        (err, rows) => {
+            if (err) {
+                console.log("DB ERROR:", err);
+                return res.status(500).json({ error: err.message });
+            }
+
+            console.log("Rows found:", rows);
+
+            if (rows.length > 0 && String(rows[0].EmployeeID) === String(password)) {
+                res.json({ username: rows[0].FirstName });
+            } else {
+                res.status(401).send("Invalid login");
+            }
+        }
     );
-    
-    console.log("Database rows found:", rows);
-
-    if (rows.length > 0) {
-        console.log("DB password:", rows[0].EmployeeID);
-        console.log("DB password type:", typeof rows[0].EmployeeID);
-    }
-
-    if (rows.length > 0 && String(rows[0].EmployeeID) === String(password)) {
-        res.json({ username: rows[0].FirstName });
-    } else {
-        res.status(401).send("Invalid login");
-    }
 });
 
 const PORT = process.env.PORT || 3000;
