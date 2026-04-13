@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XYZ Company HR Website</title>
+    <link rel="stylesheet" href="csstest.css">
+</head>
+<body>
+    <div id="headerRectangle">
+        <p>XYZ Company HR Website</p>
+    </div>
+    <div class="login-container">  
+        <div class="column">   
+            <div id="employeeLoginRectangle">
+                <input type="text" id="employeeUsername" placeholder="Username">
+                <input type="password" id="employeePassword" placeholder="Password">
+                <button id="employeeLoginButton">Login</button>
+                <p>Employee Login</p>
+            </div>  
+        </div>
+        <div class="column">
+            <div id="managerLoginRectangle">
+                <input type="text" id="managerUsername" placeholder="Username">
+                <input type="password" id="managerPassword" placeholder="Password">
+               
+                <button id="managerLoginButton">Login</button>
+                <p>Manager Login</p>
+            </div>        
+        </div>
+    </div>
+<script>
+    window.employeeUsers = [];
+    fetch("https://raw.githubusercontent.com/emilyshough/Human-Resources-Turnover-System---CSCI-440-01W/main/employee_login_info%20-%20Sheet1.csv")
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.split(/\r?\n/).slice(1);
+            window.employeeUsers = rows.map(row => {
+                const [username, password] = row.split(",");
+                return {
+                    username: username.trim(),
+                    password: password.trim()
+                };
+            });
+        console.log("Users loaded:", window.employeeUsers);
+    });
+    document.getElementById("employeeLoginButton").onclick = function() {
+        const username = document.getElementById("employeeUsername").value.trim();
+        const password = document.getElementById("employeePassword").value.trim();
+
+        if (!window.employeeUsers || window.employeeUsers.length === 0) {
+            alert("User data not loaded yet. Try again.");
+            return;
+        }
+
+        const validUser = window.employeeUsers.find(user =>
+            user.username === username && user.password === password
+        );
+
+        if(validUser) {
+            sessionStorage.setItem("loggedInEmployee", validUser.username);
+            window.location.href = "employeeDashboard.html";
+        } else {
+            alert("Incorrect username or password.");
+        }
+        
+    };
+
+    window.managerUsers = [];
+    fetch("https://raw.githubusercontent.com/emilyshough/Human-Resources-Turnover-System---CSCI-440-01W/main/manager_login_info%20-%20Sheet1.csv")
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.split(/\r?\n/).slice(1);
+            window.managerUsers = rows.map(row => {
+                const [username, password] = row.split(",");
+                return {
+                    username: username.trim(),
+                    password: password.trim()
+                };
+            });
+        console.log("Users loaded:", window.managerUsers);
+    });
+
+    document.getElementById("managerLoginButton").onclick = function() {
+        const username = document.getElementById("managerUsername").value.trim();
+        const password = document.getElementById("managerPassword").value.trim();
+
+        if (!window.managerUsers || window.managerUsers.length === 0) {
+            alert("User data not loaded yet. Try again.");
+            return;
+        }
+
+        const validUser = window.managerUsers.find(user =>
+            user.username === username && user.password === password
+        );
+
+        if(validUser) {
+            sessionStorage.setItem("loggedInManager", validUser.username);
+            window.location.href = "managerDashboard.html";
+        } else {
+            alert("Incorrect username or password.");
+        }
+        
+    };
+
+</script>
+
+</body>
+</html>
+

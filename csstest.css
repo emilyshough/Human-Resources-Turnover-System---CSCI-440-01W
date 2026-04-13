@@ -1,0 +1,277 @@
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f2e6d5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    gap: 20px;
+}
+
+#headerRectangle {
+    width: 100%;
+    height: 175px;
+    background-color: rgb(94, 122, 196);
+    border-radius: 15px;
+    border-color: rgb(56, 82, 180);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    margin: 30px auto;
+    gap: 50px;
+    width: 75%;
+}
+
+#employeeLoginRectangle,
+#managerLoginRectangle {
+    position: relative;
+    width: 80%;
+    height: 300px;
+    background-color: rgb(243, 190, 122);
+    border-radius: 15px;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 15px;
+    text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+/*login placeholder*/
+[contenteditable]:empty:before {
+    content: attr(data-placeholder);
+    color: gray;
+    pointer-events: none;
+}
+
+#employeeUsername,
+#managerUsername {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 40px;
+    background-color: rgb(246, 243, 243);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding-left: 20px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+#employeePassword,
+#managerPassword {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 40px;
+    background-color: rgb(246, 243, 243);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding-left: 20px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+#employeeLoginButton,
+#managerLoginButton {
+    position: absolute;
+    top: 210px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 40px;
+    background-color: lightcoral;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+#employeeDashboardHeader,
+#managerDashboardHeader,
+#turnoverReportHeader,
+#exitInterviewHeader {
+    width: 100%;
+    height: 175px;
+    background-color: rgb(94, 122, 196);
+    border-radius: 15px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    margin: 0;
+}
+
+#welcomeMessageManager,
+#welcomeMessageEmployee {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+.employeeDashboardColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    gap: 20px;
+}
+
+#employeeUpdateInfo,
+#trackGoals,
+#requestManagerMeeting,
+#viewPerformance,
+#requestResignation {
+    width: 60%; 
+    max-width: 900px; 
+    height: 120px; 
+    background-color: rgb(243, 190, 122);
+    border-radius: 15px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+#employeeUpdateInfo:hover,
+#trackGoals:hover,
+#requestManagerMeeting:hover,
+#viewPerformance:hover,
+#requestResignation:hover {
+    background-color: rgb(240, 141, 57);
+    transform: scale(1.02);
+    transition: 0.2s;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.managerDashboardColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+    align-items: center;   
+    margin-top: 20px;     
+    width: 100%;
+    gap: 20px;
+}
+
+#conductExitInterview,
+#processOffboarding,
+#manageEmployeeSeparation,
+#generateTurnoverReport,
+#updateEmployeeRecords {
+    position: relative;
+    width: 60%; 
+    max-width: 900px; 
+    height: 120px;
+    background-color: rgb(243, 190, 122);
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+#conductExitInterview:hover,
+#processOffboarding:hover,
+#manageEmployeeSeparation:hover,
+#generateTurnoverReport:hover,
+#updateEmployeeRecords:hover {
+    background-color: rgb(240, 141, 57);
+    transform: scale(1.02);
+    transition: 0.2s;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px; 
+}
+
+/*Conduct Exit Interview Styling*/
+.todoListColumn {
+    height: 400px;
+    width: 60%;
+    padding: 10px;
+    background-color: rgb(243, 190, 122);
+    border-radius: 15px;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+.todoListColumn form div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/*Dashboard home button*/
+#dashboard {
+    top: 15px;
+    left: 20px;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    align-self: flex-start;
+    width: auto;        
+    display: inline;
+}
+
+#dashboard:hover {
+    text-decoration: underline;
+}

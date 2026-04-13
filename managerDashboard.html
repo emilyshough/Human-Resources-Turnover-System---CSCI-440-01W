@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>XYZ Company HR Website</title>
+        <link rel="stylesheet" href="csstest.css">
+    </head>
+    <body>
+        <div id="managerDashboardHeader">
+            <p>Manager Dashboard</p>
+            <p id="welcomeMessageManager"></p>
+        </div>
+        
+        <div class="managerDashboardColumn">
+            <a href="exitInterview.html">
+                <div id="conductExitInterview">
+                    <p>Conduct Exit Interview</p>
+                </div>
+            </a>
+
+            <div id="processOffboarding">
+                <p>Process Offboarding</p>
+            </div>
+
+            <div id="manageEmployeeSeparation">
+                <p>Manage Employee Separation</p>
+            </div>
+
+            <a href="turnoverReport.html">
+                <div id="generateTurnoverReport">
+                    <p>Generate Turnover Report</p>
+                </div>
+            </a>
+
+            <div id="updateEmployeeRecords">
+                <p>Update Employee Records</p>
+            </div>
+        </div>
+        
+    <script>
+        const loggedInManager = sessionStorage.getItem("loggedInManager");
+
+        if (!loggedInManager) {
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("welcomeMessageManager").innerText = "Welcome, " + loggedInManager + "!";
+    </script>
+    </body>
+</html>

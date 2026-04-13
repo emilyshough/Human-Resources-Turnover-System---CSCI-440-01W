@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>XYZ Company HR Website</title>
+        <link rel="stylesheet" href="csstest.css">
+    </head>
+    <body>
+        <div id="employeeDashboardHeader">
+            <p>Employee Dashboard</p>
+            <p id="welcomeMessageEmployee"></p>
+        </div>
+        
+        <div class="employeeDashboardColumn">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdftc-BGL-f7YycV6g8ShgWwsEodOhxoAnhERDloqjR5skORw/viewform">
+                <div id="employeeUpdateInfo">
+                    <p>Update Employee Information</p>
+                </div>
+            </a>
+
+            <div id="trackGoals">
+                <p>Track Goals</p>
+            </div>
+
+            <div id="requestManagerMeeting">
+                <p>Request Meeting With Manager</p>
+            </div>
+
+            <div id="viewPerformance">
+                <p>View Performance</p>
+            </div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9STvt0w4MaFxy8hTFdZcKXH4yT_FWITS0IMHUQibDU_KXoQ/viewform?usp=publish-editor">
+                <div id="requestResignation">
+                    <p>Request Resignation</p>
+                </div>
+            </a>
+        </div>
+        <script>
+        const loggedInEmployee = sessionStorage.getItem("loggedInEmployee");
+
+        if (!loggedInEmployee) {
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("welcomeMessageEmployee").innerText = "Welcome, " + loggedInEmployee + "!";
+        </script>
+    </body>
+</html>
