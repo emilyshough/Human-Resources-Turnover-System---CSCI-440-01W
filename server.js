@@ -6,12 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MySQL
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password1',
-    database: 'hr_turnover_system'
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT
 });
 db.connect(err => {
     if (err) {
@@ -51,7 +51,8 @@ app.post('/users', (req, res) => {
     });
 });
 
-// 
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log("Server running on port " + PORT);
 });
