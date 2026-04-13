@@ -46,7 +46,7 @@ app.post("/users/login", async (req, res) => {
     const { username, password } = req.body;
     const [rows] = await db.execute(
         "SELECT * FROM employee WHERE FirstName = ? AND EmployeeID = ?",
-        [username, password]
+        [username, String(password)]
     );
     if (rows.length > 0) {
         res.json({ username: rows[0].FirstName });
