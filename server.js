@@ -41,17 +41,15 @@ app.get('/users', (req, res) => {
     });
 }); // 
 
-// LOGIN ROUTE
+// Login Route
 app.post("/users/login", async (req, res) => {
     const { username, password } = req.body;
-
     const [rows] = await db.execute(
-        "SELECT * FROM users WHERE username = ? AND password = ?",
+        "SELECT * FROM employee WHERE FirstName = ? AND EmployeeID = ?",
         [username, password]
     );
-
     if (rows.length > 0) {
-        res.json({ username: rows[0].username });
+        res.json({ username: rows[0].FirstName });
     } else {
         res.status(401).send("Invalid login");
     }
