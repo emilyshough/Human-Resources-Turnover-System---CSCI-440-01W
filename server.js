@@ -17,14 +17,6 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
-db.connect(err => {
-    if (err) {
-        console.error('Database connection failed:', err);
-        return;
-    }
-    console.log('Connected to MySQL');
-});
-
 // 
 app.get('/', (req, res) => {
     res.send('API is working!');
