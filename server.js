@@ -49,6 +49,20 @@ app.get('/users', (req, res) => {
     });
 });// 
 
+app.post("/users/login", async (req, res) => {
+    const { username, password } = req.body;
+
+    const [rows] = await db.execute(
+        "SELECT * FROM users WHERE username = ? AND password = ?",
+        [username, password]
+    );
+
+    if (rows.length > 0) {
+        res.json({ username: rows[0].username });
+    } else {
+        res.status(401).send("Invalid login");
+    }
+});
 
 const PORT = process.env.PORT || 3000;
 
