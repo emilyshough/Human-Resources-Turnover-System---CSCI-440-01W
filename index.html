@@ -35,15 +35,15 @@ document.getElementById("employeeLoginButton").onclick = async function () {
     const username = document.getElementById("employeeUsername").value.trim();
     const password = document.getElementById("employeePassword").value.trim();
 
-    const res = await fetch(API_URL);
-    const users = await res.json();
+    const res = await fetch(API_URL + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    });
 
-    const validUser = users.find(user =>
-        user.username === username && user.password === password
-    );
-
-    if (validUser) {
-        sessionStorage.setItem("loggedInEmployee", validUser.username);
+    if (res.ok) {
+        const data = await res.json();
+        sessionStorage.setItem("loggedInEmployee", data.username);
         window.location.href = "employeeDashboard.html";
     } else {
         alert("Incorrect username or password.");
@@ -55,15 +55,15 @@ document.getElementById("managerLoginButton").onclick = async function () {
     const username = document.getElementById("managerUsername").value.trim();
     const password = document.getElementById("managerPassword").value.trim();
 
-    const res = await fetch(API_URL);
-    const users = await res.json();
+    const res = await fetch(API_URL + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    });
 
-    const validUser = users.find(user =>
-        user.username === username && user.password === password
-    );
-
-    if (validUser) {
-        sessionStorage.setItem("loggedInManager", validUser.username);
+    if (res.ok) {
+        const data = await res.json();
+        sessionStorage.setItem("loggedInManager", data.username);
         window.location.href = "managerDashboard.html";
     } else {
         alert("Incorrect username or password.");
