@@ -35,6 +35,8 @@ document.getElementById("employeeLoginButton").onclick = async function () {
     const username = document.getElementById("employeeUsername").value.trim();
     const password = document.getElementById("employeePassword").value.trim();
 
+    alert("Sending: " + username + " / " + password);
+
     const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
