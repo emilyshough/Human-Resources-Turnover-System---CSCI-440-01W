@@ -6,13 +6,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-console.log({
-    host: process.env.MYSQLHOST,
-    user: process.env.MYSQLUSER,
-    database: process.env.MYSQLDATABASE,
-    port: process.env.MYSQLPORT
-});
-
 const db = mysql.createPool({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
@@ -24,17 +17,16 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
-// 
+// TEST ROUTE
 app.get('/', (req, res) => {
     res.send('API is working!');
 });
 
-// 
+// GET USERS (employee login data)
 app.get('/users', (req, res) => {
     db.query(`
         SELECT 
-            EmployeeID,
-            CONCAT(FirstName, ' ', LastName) AS username,
+            FirstName AS username,
             EmployeeID AS password
         FROM employee
     `, (err, result) => {
@@ -47,8 +39,9 @@ app.get('/users', (req, res) => {
         }
         res.json(result);
     });
-});// 
+}); // 
 
+// LOGIN ROUTE
 app.post("/users/login", async (req, res) => {
     const { username, password } = req.body;
 
