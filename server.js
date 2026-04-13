@@ -45,29 +45,37 @@ app.get('/users', (req, res) => {
 app.post("/users/login", (req, res) => {
     const { username, password } = req.body;
 
-    console.log("Received username:", username);
-    console.log("Received password:", password);
-
+    // First check manager table
     db.query(
-        "SELECT FirstName, EmployeeID FROM employee WHERE FirstName = ?",
-        [username],
-        (err, rows) => {
-            if (err) {
-                console.log("DB ERROR:", err);
-                return res.status(500).json({ error: err.message });
+        `SELECT e.FirstName, e.EmployeeID 
+         FROM employee e 
+         JOIN manager m ON e.EmployeeID = m.EmployeeID 
+         WHERE e.FirstName = ? AND e.EmployeeID = ?`,
+        [username, password],
+        (err, managerRows) => {
+            if (err) return res.status(500).json({ error: err.message });
+
+            if (managerRows.length > 0) {
+                return res.json({ username: managerRows[0].FirstName, role: "manager" });
             }
 
-            console.log("Rows found:", rows);
+            // If not a manager, check regular employee
+            db.query(
+                "SELECT FirstName, EmployeeID FROM employee WHERE FirstName = ? AND EmployeeID = ?",
+                [username, password],
+                (err, employeeRows) => {
+                    if (err) return res.status(500).json({ error: err.message });
 
-            if (rows.length > 0 && String(rows[0].EmployeeID) === String(password)) {
-                res.json({ username: rows[0].FirstName });
-            } else {
-                res.status(401).send("Invalid login");
-            }
+                    if (employeeRows.length > 0) {
+                        return res.json({ username: employeeRows[0].FirstName, role: "employee" });
+                    }
+
+                    res.status(401).send("Invalid login");
+                }
+            );
         }
     );
 });
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
