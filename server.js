@@ -34,17 +34,20 @@ app.get('/users', (req, res) => {
     db.query(`
         SELECT 
             EmployeeID,
-            Email AS username
+            CONCAT(FirstName, ' ', LastName) AS username,
+            EmployeeID AS password
         FROM employee
     `, (err, result) => {
         if (err) {
             console.log("MYSQL ERROR:", err);
-            return res.status(500).json({ fatal: true, error: err.message });
+            return res.status(500).json({
+                fatal: true,
+                error: err.message
+            });
         }
         res.json(result);
     });
-});
-// 
+});// 
 
 
 const PORT = process.env.PORT || 3000;
