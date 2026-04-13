@@ -30,13 +30,15 @@ app.get('/', (req, res) => {
 app.get('/users', (req, res) => {
     db.query('SELECT * FROM users', (err, result) => {
         if (err) {
-            res.status(500).send(err);
-            return;
+            console.log("MYSQL ERROR:", err); 
+            return res.status(500).json({
+                fatal: true,
+                error: err.message
+            });
         }
         res.json(result);
     });
 });
-
 // 
 app.post('/users', (req, res) => {
     const { username, password } = req.body;
