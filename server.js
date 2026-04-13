@@ -44,11 +44,24 @@ app.get('/users', (req, res) => {
 // Login Route
 app.post("/users/login", async (req, res) => {
     const { username, password } = req.body;
+    
+    console.log("Received username:", username);
+    console.log("Received password:", password);
+    console.log("Password type:", typeof password);
+
     const [rows] = await db.execute(
-        "SELECT * FROM employee WHERE FirstName = ? AND EmployeeID = ?",
-        [username, String(password)]
+        "SELECT FirstName, EmployeeID FROM employee WHERE FirstName = ?",
+        [username]
     );
+    
+    console.log("Database rows found:", rows);
+
     if (rows.length > 0) {
+        console.log("DB password:", rows[0].EmployeeID);
+        console.log("DB password type:", typeof rows[0].EmployeeID);
+    }
+
+    if (rows.length > 0 && String(rows[0].EmployeeID) === String(password)) {
         res.json({ username: rows[0].FirstName });
     } else {
         res.status(401).send("Invalid login");
