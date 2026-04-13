@@ -45,15 +45,22 @@ app.get('/users', (req, res) => {
 app.post("/users/login", (req, res) => {
     const { username, password } = req.body;
 
+    console.log("Received:", username, password);
+
     // First check manager table
     db.query(
         `SELECT e.FirstName, e.EmployeeID 
          FROM employee e 
          JOIN manager m ON e.EmployeeID = m.EmployeeID 
-         WHERE e.FirstName = ? AND e.EmployeeID = ?`,
-        [username, password],
+         WHERE e.FirstName = ? AND CAST(e.EmployeeID AS CHAR) = ?`,
+        [username, String(password)],
         (err, managerRows) => {
-            if (err) return res.status(500).json({ error: err.message });
+            if (err) {
+                console.log("Manager query error:", err);
+                return res.status(500).json({ error: err.message });
+            }
+
+            console.log("Manager rows:", managerRows);
 
             if (managerRows.length > 0) {
                 return res.json({ username: managerRows[0].FirstName, role: "manager" });
@@ -61,10 +68,16 @@ app.post("/users/login", (req, res) => {
 
             // If not a manager, check regular employee
             db.query(
-                "SELECT FirstName, EmployeeID FROM employee WHERE FirstName = ? AND EmployeeID = ?",
-                [username, password],
+                `SELECT FirstName, EmployeeID FROM employee 
+                 WHERE FirstName = ? AND CAST(EmployeeID AS CHAR) = ?`,
+                [username, String(password)],
                 (err, employeeRows) => {
-                    if (err) return res.status(500).json({ error: err.message });
+                    if (err) {
+                        console.log("Employee query error:", err);
+                        return res.status(500).json({ error: err.message });
+                    }
+
+                    console.log("Employee rows:", employeeRows);
 
                     if (employeeRows.length > 0) {
                         return res.json({ username: employeeRows[0].FirstName, role: "employee" });
@@ -75,8 +88,7 @@ app.post("/users/login", (req, res) => {
             );
         }
     );
-});
-const PORT = process.env.PORT || 3000;
+});const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
