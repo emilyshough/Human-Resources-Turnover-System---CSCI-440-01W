@@ -211,7 +211,8 @@ a {
 #manageEmployeeSeparation,
 #generateTurnoverReport,
 #updateEmployeeRecords,
-#exitInterview {
+#exitInterview,
+#viewResignationRequests {
     position: relative;
     width: 60%; 
     max-width: 900px; 
