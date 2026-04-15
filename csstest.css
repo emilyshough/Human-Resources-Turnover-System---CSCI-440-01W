@@ -1,3 +1,4 @@
+/*Styling for the body of the wesbite*/
 body {
     margin: 0;
     padding: 20px;
@@ -8,6 +9,7 @@ body {
     gap: 20px;
 }
 
+/*Styling for the header rectangles*/
 #headerRectangle {
     width: 100%;
     height: 175px;
@@ -21,6 +23,7 @@ body {
     font-size: 30px;
 }
 
+/*Styling for the login column*/
 .column {
     display: flex;
     flex-direction: column;
@@ -29,6 +32,7 @@ body {
     width: 50%;
 }
 
+/*Styling for the login column*/
 .login-container {
     display: flex;
     justify-content: center;
@@ -39,6 +43,7 @@ body {
     width: 75%;
 }
 
+/*Styling for the login rectangles*/
 #employeeLoginRectangle,
 #managerLoginRectangle {
     position: relative;
@@ -54,13 +59,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
-/*login placeholder*/
+
+/*login placeholder before user starts typing*/
 [contenteditable]:empty:before {
     content: attr(data-placeholder);
     color: gray;
     pointer-events: none;
 }
 
+/*Styling for the username rectangles*/
 #employeeUsername,
 #managerUsername {
     position: absolute;
@@ -80,6 +87,7 @@ body {
     font-size: 15px;
 }
 
+/*Styling for the password rectangles*/
 #employeePassword,
 #managerPassword {
     position: absolute;
@@ -99,6 +107,7 @@ body {
     font-size: 15px;
 }
 
+/*Styling for the login buttons*/
 #employeeLoginButton,
 #managerLoginButton {
     position: absolute;
@@ -117,6 +126,7 @@ body {
     font-size: 15px;
 }
 
+/*Styling for the headers on pages*/
 #employeeDashboardHeader,
 #managerDashboardHeader,
 #turnoverReportHeader,
@@ -136,6 +146,7 @@ body {
     margin: 0;
 }
 
+/*Styling for the welcome messages when a user logs in*/
 #welcomeMessageManager,
 #welcomeMessageEmployee {
     font-family:Arial, Helvetica, sans-serif;
@@ -143,6 +154,7 @@ body {
     text-align: center;
 }
 
+/*Styling for the employee dashboard column*/
 .employeeDashboardColumn {
     display: flex;
     flex-direction: column;
@@ -152,6 +164,7 @@ body {
     gap: 20px;
 }
 
+/*Styling for the employee dashboard contents*/
 #employeeUpdateInfo,
 #trackGoals,
 #requestManagerMeeting,
@@ -169,6 +182,7 @@ body {
     font-size: 20px;
 }
 
+/*Styling for the employee dashboard contents*/
 #employeeUpdateInfo:hover,
 #trackGoals:hover,
 #requestManagerMeeting:hover,
@@ -184,6 +198,7 @@ body {
     font-size: 20px;
 }
 
+/*Styling for links within the website*/
 a {
     text-decoration: none;
     color: black;
@@ -196,6 +211,7 @@ a {
     font-size: 20px;
 }
 
+/*Styling for the employee dashboard contents*/
 .managerDashboardColumn {
     display: flex;
     flex-direction: column;
@@ -206,11 +222,13 @@ a {
     gap: 20px;
 }
 
+/*Styling for the manager dashboard contents*/
 #conductExitInterview,
 #processOffboarding,
 #manageEmployeeSeparation,
 #generateTurnoverReport,
 #updateEmployeeRecords,
+/*Styling for content within pages for exit interview and view resignation requests (part of process offboarding)*/
 #exitInterview,
 #viewResignationRequests {
     position: relative;
@@ -227,11 +245,14 @@ a {
     font-size: 20px;
 }
 
+/*Styling for the manager dashboard contents*/
 #conductExitInterview:hover,
 #processOffboarding:hover,
 #manageEmployeeSeparation:hover,
 #generateTurnoverReport:hover,
-#updateEmployeeRecords:hover {
+#updateEmployeeRecords:hover,
+#exitInterview:hover,
+#viewResignationRequests:hover {
     background-color: rgb(240, 141, 57);
     transform: scale(1.02);
     transition: 0.2s;
@@ -274,18 +295,18 @@ a {
     width: auto;        
     display: inline;
 }
-
 #dashboard:hover {
     text-decoration: underline;
 }
 
+/*Styling for offboarding checklist*/
 .offboardingChecklist {
-    height: 400px;
+    height: 300px;
     width: 60%;
     padding: 10px;
     background-color: rgb(243, 190, 122);
     border-radius: 15px;
-    justify-content: center;
+    justify-content: top;
     text-align: center;
     flex-direction: column;
     display: flex;
