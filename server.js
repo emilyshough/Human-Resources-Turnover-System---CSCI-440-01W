@@ -90,6 +90,39 @@ app.post("/users/login", (req, res) => {
     );
 });const PORT = process.env.PORT || 3000;
 
+// update employee info
+app.post('/update-employee', (req, res) => {
+    const {
+        EmployeeID, FirstName, LastName, DOB, Address,
+        PhoneNum, Email, HireDate, Salary, DeptID, PositionID
+    } = req.body;
+
+    if (!EmployeeID) {
+        return res.status(400).json({ message: 'EmployeeID is required.' });
+    }
+
+    const fields = { FirstName, LastName, DOB, Address, PhoneNum, Email, HireDate, Salary, DeptID, PositionID };
+    const updates = Object.entries(fields).filter(([_, v]) => v !== undefined && v !== '');
+
+    if (updates.length === 0) {
+        return res.status(400).json({ message: 'No fields to update.' });
+    }
+
+    const sql = `UPDATE employee SET ${updates.map(([k]) => `${k} = ?`).join(', ')} WHERE EmployeeID = ?`;
+    const values = [...updates.map(([_, v]) => v), EmployeeID];
+
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.log("Update error:", err);
+            return res.status(500).json({ error: err.message });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'No employee found with that ID.' });
+        }
+        res.json({ message: `Employee ${EmployeeID} updated successfully.` });
+    });
+});
+
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
