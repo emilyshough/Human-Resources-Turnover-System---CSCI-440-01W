@@ -326,7 +326,8 @@ a {
 #reasonsForLeaving,
 #turnoverPercentages,
 #avgPerformanceRatings,
-#spreadsheetData {
+#spreadsheetData,
+#viewUpdateRecordsRequest {
     position: relative;
     z-index: 1;
     width: 40%; 
@@ -348,4 +349,16 @@ a {
     margin: 0;
     width: 100%;
     text-align: center;             
+}
+
+/* styling for update records requests form */
+.formBody {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
 }
