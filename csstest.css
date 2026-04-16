@@ -327,6 +327,7 @@ a {
 #avgPerformanceRatings,
 #spreadsheetData {
     position: relative;
+    z-index: 1;
     width: 60%; 
     max-width: 900px; 
     height: 120px;
