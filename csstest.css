@@ -177,6 +177,7 @@ body {
     border-radius: 15px;
     justify-content: center;
     text-align: center;
+    align-items: center;
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
@@ -326,5 +327,8 @@ a {
 #avgPerformanceRatings,
 #spreadsheetData {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px
+    font-size: 20px;
+    color: black;
+    display: block;
+    margin-top: 20px;
 }
