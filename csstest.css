@@ -366,6 +366,19 @@ a {
     color: black;
 }
 
+#updateRecordsExplanation {
+    width: 60%;
+    max-width: 900px;
+    background-color: rgba(94, 122, 196, 0.12);
+    border-left: 6px solid rgb(94, 122, 196);
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
 /* styling for update records requests form */
 #formBody {
     font-family: Arial, Helvetica, sans-serif;
