@@ -355,7 +355,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40%;
+    width: 50%;
     max-width: 900px;
     height: 100px;
     background-color: rgb(243, 190, 122);
@@ -380,7 +380,7 @@ a {
 
 /*styling for the explanation to update records*/
 #updateRecordsExplanation {
-    width: 60%;
+    width: 50%;
     max-width: 900px;
     background-color: rgba(94, 122, 196, 0.12);
     border-left: 6px solid rgb(94, 122, 196);
@@ -393,9 +393,6 @@ a {
 }
 
 /* styling for update records requests form */
-#updateForm {
-    background-color: rgb(247, 164, 90);
-}
 #formBody {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
