@@ -22,7 +22,7 @@
             <p>Update information in form below. </p>
         </div>
         <div id="updateForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
-                <div id="updateForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+                
         <div style="display: flex; gap: 10px; margin-bottom: 16px;">
             <input type="text" id="empId" placeholder="Employee ID" style="flex:1; padding: 8px;">
             <button onclick="loadEmployee()">Load Record</button>
@@ -56,7 +56,7 @@
         </div>
 
 <script>
-  const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app/users/login'; 
+  const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app'; 
 
   function loadEmployee() {
     document.getElementById('formBody').style.display = 'block';
@@ -82,7 +82,7 @@
     };
 
     try {
-      const res = await fetch(`${API_URL}/update-employee`, {
+      const res = await fetch('https://human-resources-turnover-system-csci-440-01w-production.up.railway.app/update-employee', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -94,5 +94,5 @@
     }
   }
 </script>
-        
+    </body>
 </html>
