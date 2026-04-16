@@ -328,13 +328,14 @@ a {
 #spreadsheetData {
     position: relative;
     z-index: 1;
-    width: 60%; 
+    width: 40%; 
     max-width: 900px; 
-    height: 120px;
+    height: 100px;
     background-color: rgb(243, 190, 122);
     border-radius: 15px;
     justify-content: center;
     text-align: center;
+    align-items: center;
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
