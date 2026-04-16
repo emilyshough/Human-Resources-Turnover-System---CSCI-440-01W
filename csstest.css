@@ -393,6 +393,9 @@ a {
 }
 
 /* styling for update records requests form */
+#updateForm {
+    background-color: rgb(243, 190, 122);
+}
 #formBody {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
