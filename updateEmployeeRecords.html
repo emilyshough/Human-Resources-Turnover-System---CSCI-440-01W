@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>XYZ Company HR Website</title>
+        <link rel="stylesheet" href="csstest.css">
+    </head>
+ 
+    <body>
+        <!--Home button to go back to the dashboard-->
+        <a href="managerDashboard.html" id="dashboard">⬅ Dashboard</a>
+
+        <!--Header for the page-->
+        <div id="turnoverReportHeader">
+            <p>Turnover Report</p>
+        </div>
+
+        <!--View update requests-->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdftc-BGL-f7YycV6g8ShgWwsEodOhxoAnhERDloqjR5skORw/viewform?usp=header" id="viewUpdateRecordsRequest">View Update Records Requests</a>
+    
+        <div id="updateRecordsExplanation">
+            <p>Gather all information from the 'Update Employee Information' form that needs to be updated in the system. </p>
+            <p>Update information in form below. </p>
+        </div>
+        <div id="updateForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+                <div id="updateForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+        <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <input type="text" id="empId" placeholder="Employee ID" style="flex:1; padding: 8px;">
+            <button onclick="loadEmployee()">Load Record</button>
+        </div>
+
+        <div id="formBody" style="display:none;">
+            <label>First Name</label>
+            <input type="text" id="FirstName" style="width:100%; margin-bottom:10px;"><br>
+            <label>Last Name</label>
+            <input type="text" id="LastName" style="width:100%; margin-bottom:10px;"><br>
+            <label>Date of Birth</label>
+            <input type="date" id="DOB" style="width:100%; margin-bottom:10px;"><br>
+            <label>Address</label>
+            <input type="text" id="Address" style="width:100%; margin-bottom:10px;"><br>
+            <label>Phone Number</label>
+            <input type="text" id="PhoneNum" style="width:100%; margin-bottom:10px;"><br>
+            <label>Email</label>
+            <input type="email" id="Email" style="width:100%; margin-bottom:10px;"><br>
+            <label>Hire Date</label>
+            <input type="date" id="HireDate" style="width:100%; margin-bottom:10px;"><br>
+            <label>Salary</label>
+            <input type="number" id="Salary" style="width:100%; margin-bottom:10px;"><br>
+            <label>Department ID</label>
+            <input type="text" id="DeptID" style="width:100%; margin-bottom:10px;"><br>
+            <label>Position ID</label>
+            <input type="text" id="PositionID" style="width:100%; margin-bottom:20px;"><br>
+
+            <button onclick="submitUpdate()">Save Changes</button>
+        </div>
+        <p id="statusMsg" style="margin-top: 12px; font-weight: bold;"></p>
+        </div>
+
+<script>
+  const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app/users/login'; 
+
+  function loadEmployee() {
+    document.getElementById('formBody').style.display = 'block';
+    document.getElementById('statusMsg').textContent = '';
+  }
+
+  async function submitUpdate() {
+    const id = document.getElementById('empId').value.trim();
+    if (!id) { alert('Please enter an Employee ID'); return; }
+
+    const payload = {
+      EmployeeID: id,
+      FirstName:  document.getElementById('FirstName').value,
+      LastName:   document.getElementById('LastName').value,
+      DOB:        document.getElementById('DOB').value,
+      Address:    document.getElementById('Address').value,
+      PhoneNum:   document.getElementById('PhoneNum').value,
+      Email:      document.getElementById('Email').value,
+      HireDate:   document.getElementById('HireDate').value,
+      Salary:     document.getElementById('Salary').value,
+      DeptID:     document.getElementById('DeptID').value,
+      PositionID: document.getElementById('PositionID').value,
+    };
+
+    try {
+      const res = await fetch(`${API_URL}/update-employee`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      document.getElementById('statusMsg').textContent = data.message || 'Updated!';
+    } catch (err) {
+      document.getElementById('statusMsg').textContent = 'Error: could not reach server.';
+    }
+  }
+</script>
+        
+</html>
