@@ -352,23 +352,22 @@ a {
 
 /*styling for view update records request button*/
 #viewUpdateRecordsRequest {
-    position: relative;
-    z-index: 1;
-    width: 40%; 
-    max-width: 900px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    max-width: 900px;
     height: 100px;
     background-color: rgb(243, 190, 122);
     border-radius: 15px;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    display: flex;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
+    text-decoration: none;
+    color: black;
 }
 
 /* styling for update records requests form */
-.formBody {
+#formBody {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     display: flex;
