@@ -21,11 +21,15 @@
                 <button onclick="loadEmployee()">Load Employees</button>
             </div>
 
+            <!--Select which employee to terminate-->
             <div id="employeeStatusFormBody">
                 <label>Employee ID</label>
                 <input type="number" id="EmployeeID" style="width:100%; margin-bottom:10px;"><br>
                 <label>Is this employee terminated?</label>
-                <input type="checkbox" id="terminated" name="is_terminated" value="true">
+                <input type="checkbox" id="terminated" name="is_terminated" value="true"><br>
+                
+                <!--Button to save changes-->
+                <button onclick="submitUpdate()">Save Changes</button>
             </div>
         </div>
     </body>
