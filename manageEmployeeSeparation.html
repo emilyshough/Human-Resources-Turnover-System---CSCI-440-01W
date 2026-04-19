@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>XYZ Company HR Website</title>
+        <link rel="stylesheet" href="csstest.css">
+    </head>
+
+    <body>
+        <!--Home button to go back to the dashboard-->
+        <a href="managerDashboard.html" id="dashboard">⬅ Dashboard</a>
+
+        <!--Header for the page-->
+        <div id="manageEmployeeSeparationHeader">
+            <p>Manage Employee Separation</p>
+        </div>
+
+        <!--Search through employees through this form to select an employee to let go-->
+        <div id="viewEmployeeForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+            <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                <input type="text" id="empId" placeholder="Employee ID" style="flex:1; padding: 8px;">
+                <button onclick="loadEmployee()">Load Employees</button>
+            </div>
+
+            <div id="employeeStatusFormBody">
+                <label>Employee ID</label>
+                <input type="number" id="EmployeeID" style="width:100%; margin-bottom:10px;"><br>
+                <label>Is this employee terminated?</label>
+                <input type="checkbox" id="terminated" name="is_terminated" value="true">
+            </div>
+        </div>
+    </body>
+</html>
