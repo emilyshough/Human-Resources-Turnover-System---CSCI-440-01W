@@ -395,11 +395,13 @@ a {
 
 /* styling for forms */
 #updateForm,
-#viewEmployeeForm {
+#viewEmployeeForm,
+#employeeInfo {
     background-color: rgb(243, 190, 122);
 }
 #formBody,
-#employeeStatusFormBody{
+#employeeStatusFormBody,
+#employeeInfo{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     display: flex;
@@ -409,3 +411,5 @@ a {
     margin: 0 auto;
     padding: 20px;
 }
+
+/* Styling for manageEmployee */
