@@ -8,32 +8,42 @@
     <body>
         <!--Home button to go back to the dashboard-->
         <a href="managerDashboard.html" id="dashboard">⬅ Dashboard</a>
-
+ 
         <!--Header for the page-->
         <div id="manageEmployeeSeparationHeader">
             <p>Manage Employee Separation</p>
         </div>
-
-        <!--Search through employees through this form to select an employee to let go-->
+ 
         <div id="viewEmployeeForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+ 
+            <!-- Enter ID and load employee -->
             <div style="display: flex; gap: 10px; margin-bottom: 16px;">
                 <input type="text" id="empId" placeholder="Employee ID" style="flex:1; padding: 8px;">
-                <button onclick="loadEmployee()">Load Employees</button>
+                <button onclick="loadEmployee()">Load Employee</button>
             </div>
-
-            <!--Select which employee to terminate-->
-            <div id="employeeStatusFormBody">
-                <label>Employee ID</label>
-                <input type="number" id="EmployeeID" style="width:100%; margin-bottom:10px;"><br>
+ 
+            <!-- Status/error messages -->
+            <p id="statusMsg" style="font-weight: bold; color: #333;"></p>
+ 
+            <!-- Employee info card — hidden until loaded -->
+            <div id="employeeInfo" style="display:none; margin-bottom: 16px; padding: 10px; background: #f9f9f9; border-radius: 4px;">
+                <strong>Name:</strong> <span id="empName">—</span><br>
+                <strong>Employee ID:</strong> <span id="empIdDisplay">—</span>
+            </div>
+ 
+            <!-- Termination form — hidden until loaded -->
+            <div id="employeeStatusFormBody" style="display:none;">
                 <label>
                     <input type="checkbox" id="terminated" name="is_terminated" value="true">
                     Is this employee terminated?
                 </label>
-                
-                <!--Button to save changes-->
+                <br><br>
                 <button onclick="submitUpdate()">Save Changes</button>
-                <label>Warning: By clicking 'Save Changes' you are permanently removing this employee from the system.</label>
+                <p style="color: #c0392b; font-size: 0.85em;">
+                    Warning: By clicking 'Save Changes' you are permanently removing this employee from the system.
+                </p>
             </div>
+ 
         </div>
         <script>
             // gets employee data from database
@@ -46,7 +56,8 @@
                 const statusMsg = document.getElementById('statusMsg');
                 statusMsg.style.color = '#333';
                 statusMsg.textContent = 'Loading...';
-                document.getElementById('formBody').style.display = 'none';
+                document.getElementById('employeeInfo').style.display = 'none';
+                document.getElementById('employeeStatusFormBody').style.display = 'none';
  
                 try {
                     const response = await fetch(`${API_URL}/users`);
@@ -59,18 +70,11 @@
                         return;
                     }
  
-                    document.getElementById('FirstName').value  = employee.username || '';
-                    document.getElementById('LastName').value   = employee.LastName  || '';
-                    document.getElementById('DOB').value        = employee.DOB       || '';
-                    document.getElementById('Address').value    = employee.Address   || '';
-                    document.getElementById('PhoneNum').value   = employee.PhoneNum  || '';
-                    document.getElementById('Email').value      = employee.Email     || '';
-                    document.getElementById('HireDate').value   = employee.HireDate  || '';
-                    document.getElementById('Salary').value     = employee.Salary    || '';
-                    document.getElementById('DeptID').value     = employee.DeptID    || '';
-                    document.getElementById('PositionID').value = employee.PositionID || '';
- 
-                    document.getElementById('formBody').style.display = 'block';
+                    document.getElementById('empName').textContent = employee.username;
+                    document.getElementById('empIdDisplay').textContent = id;
+                    document.getElementById('employeeInfo').style.display = 'block';
+                    document.getElementById('employeeStatusFormBody').style.display = 'block';
+                    document.getElementById('terminated').checked = false;
                     statusMsg.textContent = '';
  
                 } catch (err) {
@@ -82,45 +86,39 @@
  
             async function submitUpdate() {
                 const id = document.getElementById('empId').value.trim();
-                if (!id) { alert('Please enter an Employee ID'); return; }
+                const isTerminated = document.getElementById('terminated').checked;
  
-                const payload = {
-                    EmployeeID: id,
-                    FirstName:  document.getElementById('FirstName').value,
-                    LastName:   document.getElementById('LastName').value,
-                    DOB:        document.getElementById('DOB').value,
-                    Address:    document.getElementById('Address').value,
-                    PhoneNum:   document.getElementById('PhoneNum').value,
-                    Email:      document.getElementById('Email').value,
-                    HireDate:   document.getElementById('HireDate').value,
-                    Salary:     document.getElementById('Salary').value,
-                    DeptID:     document.getElementById('DeptID').value,
-                    PositionID: document.getElementById('PositionID').value,
-                };
+                if (!isTerminated) {
+                    alert('Please check the termination box to confirm.');
+                    return;
+                }
+ 
+                const name = document.getElementById('empName').textContent;
+                if (!confirm(`Are you sure you want to permanently remove ${name} (ID: ${id})? This cannot be undone.`)) return;
  
                 const statusMsg = document.getElementById('statusMsg');
                 statusMsg.style.color = '#333';
-                statusMsg.textContent = 'Saving...';
+                statusMsg.textContent = 'Processing...';
  
                 try {
-                    const res = await fetch(`${API_URL}/update-employee`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                    const response = await fetch(`${API_URL}/employees/${id}`, {
+                        method: 'DELETE',
                     });
-                    const data = await res.json();
  
-                    if (res.ok) {
+                    if (response.ok) {
                         statusMsg.style.color = 'green';
-                        statusMsg.textContent = data.message || 'Employee updated successfully!';
+                        statusMsg.textContent = `Employee ${name} (ID: ${id}) has been successfully removed.`;
+                        document.getElementById('employeeStatusFormBody').style.display = 'none';
+                        document.getElementById('employeeInfo').style.display = 'none';
+                        document.getElementById('empId').value = '';
                     } else {
                         statusMsg.style.color = '#c0392b';
-                        statusMsg.textContent = data.message || 'Failed to update employee.';
+                        statusMsg.textContent = 'Failed to remove employee.';
                     }
                 } catch (err) {
                     console.error(err);
                     statusMsg.style.color = '#c0392b';
-                    statusMsg.textContent = 'Error: could not reach server.';
+                    statusMsg.textContent = 'Error connecting to server.';
                 }
             }
         </script>
