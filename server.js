@@ -123,6 +123,27 @@ app.post('/update-employee', (req, res) => {
     });
 });
 
+
+// DELETE an employee permanently 
+app.delete('/employees/:id', (req, res) => {
+    const { id } = req.params;
+ 
+    db.query(
+        'DELETE FROM employee WHERE EmployeeID = ?',
+        [id],
+        (err, result) => {
+            if (err) {
+                console.log("Delete error:", err);
+                return res.status(500).json({ error: err.message });
+            }
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ message: 'No employee found with that ID.' });
+            }
+            res.json({ message: `Employee ${id} successfully removed.` });
+        }
+    );
+});
+
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
