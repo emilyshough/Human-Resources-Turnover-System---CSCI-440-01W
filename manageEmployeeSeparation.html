@@ -37,70 +37,90 @@
         </div>
         <script>
             // gets employee data from database
-            const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app'; 
-
+            const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app';
+ 
             async function loadEmployee() {
                 const id = document.getElementById('empId').value.trim();
                 if (!id) { alert('Please enter an Employee ID'); return; }
  
                 const statusMsg = document.getElementById('statusMsg');
+                statusMsg.style.color = '#333';
                 statusMsg.textContent = 'Loading...';
+                document.getElementById('formBody').style.display = 'none';
  
                 try {
-                    
                     const response = await fetch(`${API_URL}/users`);
                     const users = await response.json();
- 
                     const employee = users.find(u => String(u.password) === String(id));
  
                     if (!employee) {
+                        statusMsg.style.color = '#c0392b';
                         statusMsg.textContent = 'No employee found with that ID.';
-                        document.getElementById('employeeInfo').style.display = 'none';
-                        document.getElementById('employeeStatusFormBody').style.display = 'none';
                         return;
                     }
  
-                    document.getElementById('empName').textContent = employee.username;
-                    document.getElementById('empIdDisplay').textContent = id;
-                    document.getElementById('employeeInfo').style.display = 'block';
-                    document.getElementById('employeeStatusFormBody').style.display = 'block';
+                    document.getElementById('FirstName').value  = employee.username || '';
+                    document.getElementById('LastName').value   = employee.LastName  || '';
+                    document.getElementById('DOB').value        = employee.DOB       || '';
+                    document.getElementById('Address').value    = employee.Address   || '';
+                    document.getElementById('PhoneNum').value   = employee.PhoneNum  || '';
+                    document.getElementById('Email').value      = employee.Email     || '';
+                    document.getElementById('HireDate').value   = employee.HireDate  || '';
+                    document.getElementById('Salary').value     = employee.Salary    || '';
+                    document.getElementById('DeptID').value     = employee.DeptID    || '';
+                    document.getElementById('PositionID').value = employee.PositionID || '';
+ 
+                    document.getElementById('formBody').style.display = 'block';
                     statusMsg.textContent = '';
+ 
                 } catch (err) {
                     console.error(err);
+                    statusMsg.style.color = '#c0392b';
                     statusMsg.textContent = 'Error connecting to server.';
                 }
             }
  
             async function submitUpdate() {
                 const id = document.getElementById('empId').value.trim();
-                const isTerminated = document.getElementById('terminated').checked;
- 
                 if (!id) { alert('Please enter an Employee ID'); return; }
-                if (!isTerminated) {
-                    alert('Please check the termination box to confirm.');
-                    return;
-                }
-                if (!confirm(`Are you sure you want to permanently remove employee #${id}? This cannot be undone.`)) return;
+ 
+                const payload = {
+                    EmployeeID: id,
+                    FirstName:  document.getElementById('FirstName').value,
+                    LastName:   document.getElementById('LastName').value,
+                    DOB:        document.getElementById('DOB').value,
+                    Address:    document.getElementById('Address').value,
+                    PhoneNum:   document.getElementById('PhoneNum').value,
+                    Email:      document.getElementById('Email').value,
+                    HireDate:   document.getElementById('HireDate').value,
+                    Salary:     document.getElementById('Salary').value,
+                    DeptID:     document.getElementById('DeptID').value,
+                    PositionID: document.getElementById('PositionID').value,
+                };
  
                 const statusMsg = document.getElementById('statusMsg');
-                statusMsg.textContent = 'Processing...';
+                statusMsg.style.color = '#333';
+                statusMsg.textContent = 'Saving...';
  
                 try {
-                    const response = await fetch(`${API_URL}/employees/${id}`, {
-                        method: 'DELETE',
+                    const res = await fetch(`${API_URL}/update-employee`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
                     });
+                    const data = await res.json();
  
-                    if (response.ok) {
-                        statusMsg.textContent = 'Employee successfully terminated and removed.';
-                        document.getElementById('employeeStatusFormBody').style.display = 'none';
-                        document.getElementById('employeeInfo').style.display = 'none';
-                        document.getElementById('empId').value = '';
+                    if (res.ok) {
+                        statusMsg.style.color = 'green';
+                        statusMsg.textContent = data.message || 'Employee updated successfully!';
                     } else {
-                        statusMsg.textContent = 'Failed to remove employee. They may not exist.';
+                        statusMsg.style.color = '#c0392b';
+                        statusMsg.textContent = data.message || 'Failed to update employee.';
                     }
                 } catch (err) {
                     console.error(err);
-                    statusMsg.textContent = 'Error connecting to server.';
+                    statusMsg.style.color = '#c0392b';
+                    statusMsg.textContent = 'Error: could not reach server.';
                 }
             }
         </script>
