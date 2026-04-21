@@ -1,6 +1,8 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 app.use(cors());
@@ -129,19 +131,23 @@ app.delete('/employees/:id', (req, res) => {
     db.query('DELETE FROM employee WHERE EmployeeID = ?', [req.params.id], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         if (result.affectedRows === 0) return res.status(404).json({ message: 'Employee not found.' });
+
+	 try {
+                await resend.emails.send({
+                    from: 'onboarding@resend.dev',
+                    to: Email,
+                    subject: 'Employment Separation Notice',
+                    html: `<p>Dear ${FirstName},</p>
+                           <p>This is a separation notification. You have been terminated from XYZ Company.</p>
+                           <p>Please contact HR if you have any questions.</p>`
+                });
+            } catch (emailErr) {
+                console.error('Email failed:', emailErr);
+                
+            }
+
         res.json({ message: `Employee ${req.params.id} removed.` });
     });
-});
-
-import { Resend } from 'resend';
-
-const resend = new Resend('re_SPYbDVGn_3oNfLrecpC45kiSsd2zQTjSG');
-
-resend.emails.send({
-  from: 'onboarding@resend.dev',
-  to: 'ehough@leomail.tamuc.edu',
-  subject: 'Termination',
-  html: '<p>This is a separation notification, you have been terminated from XYZ Company. </strong></p>'
 });
 
 app.listen(PORT, () => {
