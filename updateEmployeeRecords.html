@@ -31,7 +31,7 @@
         </div>
 
         <!--Form to update employee records-->
-        <div id="formBody">
+        <div id="formBody" style="display:none">
             <label>First Name</label>
             <input type="text" id="FirstName" style="width:100%; margin-bottom:10px;"><br>
             <label>Last Name</label>
@@ -62,41 +62,49 @@
   // gets employee data from database
   const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app'; 
 
-  function loadEmployee() {
-    document.getElementById('formBody').style.display = 'block';
-    document.getElementById('statusMsg').textContent = '';
-  }
-
-  async function submitUpdate() {
+  async function loadEmployee() {
     const id = document.getElementById('empId').value.trim();
     if (!id) { alert('Please enter an Employee ID'); return; }
 
-    const payload = {
-      EmployeeID: id,
-      FirstName:  document.getElementById('FirstName').value,
-      LastName:   document.getElementById('LastName').value,
-      DOB:        document.getElementById('DOB').value,
-      Address:    document.getElementById('Address').value,
-      PhoneNum:   document.getElementById('PhoneNum').value,
-      Email:      document.getElementById('Email').value,
-      HireDate:   document.getElementById('HireDate').value,
-      Salary:     document.getElementById('Salary').value,
-      DeptID:     document.getElementById('DeptID').value,
-      PositionID: document.getElementById('PositionID').value,
-    };
+    const statusMsg = document.getElementById('statusMsg');
+    statusMsg.style.color = '#333';
+    statusMsg.textContent = 'Loading...';
+    document.getElementById('formBody').style.display = 'none';
 
     try {
-      const res = await fetch('https://human-resources-turnover-system-csci-440-01w-production.up.railway.app/update-employee', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      document.getElementById('statusMsg').textContent = data.message || 'Updated!';
+        const response = await fetch(`${API_URL}/users`);
+        const users = await response.json();
+        const employee = users.find(u => String(u.password) === String(id));
+
+        if (!employee) {
+            statusMsg.style.color = '#c0392b';
+            statusMsg.textContent = 'No employee found with that ID.';
+            return;
+        }
+
+        // Employee found — now show the form
+        statusMsg.textContent = '';
+        document.getElementById('formBody').style.display = 'block';
+
+       const payload = {
+        EmployeeID: id,
+        FirstName:  document.getElementById('FirstName').value,
+        LastName:   document.getElementById('LastName').value,
+        DOB:        document.getElementById('DOB').value,
+        Address:    document.getElementById('Address').value,
+        PhoneNum:   document.getElementById('PhoneNum').value,
+        Email:      document.getElementById('Email').value,
+        HireDate:   document.getElementById('HireDate').value,
+        Salary:     document.getElementById('Salary').value,
+        DeptID:     document.getElementById('DeptID').value,
+        PositionID: document.getElementById('PositionID').value,
+    };
+
     } catch (err) {
-      document.getElementById('statusMsg').textContent = 'Error: could not reach server.';
+        statusMsg.style.color = '#c0392b';
+        statusMsg.textContent = 'Error connecting to server.';
     }
-  }
+}
 </script>
     </body>
 </html>
