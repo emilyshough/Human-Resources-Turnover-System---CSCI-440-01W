@@ -133,6 +133,17 @@ app.delete('/employees/:id', (req, res) => {
     });
 });
 
+import { Resend } from 'resend';
+
+const resend = new Resend('re_SPYbDVGn_3oNfLrecpC45kiSsd2zQTjSG');
+
+resend.emails.send({
+  from: 'onboarding@resend.dev',
+  to: 'ehough@leomail.tamuc.edu',
+  subject: 'Termination',
+  html: '<p>This is a separation notification, you have been terminated from XYZ Company. </strong></p>'
+});
+
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
