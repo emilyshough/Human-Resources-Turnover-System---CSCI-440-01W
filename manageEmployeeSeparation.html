@@ -121,6 +121,11 @@
                     statusMsg.textContent = 'Error connecting to server.';
                 }
             }
+            import { Resend } from 'resend';
+
+            // Access the key from Railway environment variables
+            const resend = new Resend(process.env.RESEND_API_KEY); 
+
         </script>
     </body>
 </html>
