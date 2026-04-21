@@ -1,22 +1,33 @@
 <!DOCTYPE html>
+<!--HTML and script for the login Page-->
+<!--Created by Emily Hough-->
 <html>
 <head>
+    <!--Title for the website-->
     <title>XYZ Company HR Website</title>
+
+    <!--Link to the css style sheet-->
     <link rel="stylesheet" href="csstest.css">
 </head>
 <body>
+    <!--Header for the page-->
     <div id="headerRectangle">
         <p>XYZ Company HR Website</p>
     </div>
+
+    <!--Holds the login options for employee and manager-->
     <div class="login-container">  
         <div class="column">   
+            <!--Employee login-->
             <div id="employeeLoginRectangle">
                 <input type="text" id="employeeUsername" placeholder="Username">
                 <input type="password" id="employeePassword" placeholder="Password">
+                
                 <button id="employeeLoginButton">Login</button>
                 <p>Employee Login</p>
             </div>  
         </div>
+        <!--Manager Login-->
         <div class="column">
             <div id="managerLoginRectangle">
                 <input type="text" id="managerUsername" placeholder="Username">
@@ -28,6 +39,7 @@
         </div>
     </div>
 <script>
+// Connects to the database in Railway
 const API_URL = "https://human-resources-turnover-system-csci-440-01w-production.up.railway.app/users/login";
 
 // Employee Login
@@ -35,15 +47,17 @@ document.getElementById("employeeLoginButton").onclick = async function () {
     const username = document.getElementById("employeeUsername").value.trim();
     const password = document.getElementById("employeePassword").value.trim();
 
-    // uncomment to debug login
+    // Uncomment to debug login if the login feature stops working
     // alert("Sending: " + username + " / " + password);
 
+    // Used for the login page, gets the usernames and passwords
     const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
     });
 
+    // Validates login information from the database
     if (res.ok) {
         const data = await res.json();
         if (data.role === "manager") {
@@ -53,6 +67,7 @@ document.getElementById("employeeLoginButton").onclick = async function () {
             sessionStorage.setItem("loggedInEmployee", data.username);
             window.location.href = "employeeDashboard.html";
         }
+        // Displays an alert if login information is incorrect
     } else {
         alert("Incorrect username or password.");  
     }
@@ -62,15 +77,18 @@ document.getElementById("employeeLoginButton").onclick = async function () {
 document.getElementById("managerLoginButton").onclick = async function () {
     const username = document.getElementById("managerUsername").value.trim();
     const password = document.getElementById("managerPassword").value.trim();
-    // uncomment to debug login
+    
+    // Uncomment to debug login if the login feature stops working
     // alert("Sending: " + username + " / " + password);
 
+    // Fetches the login information
     const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
     });
 
+    // Validates the login information from the database
     if (res.ok) {
     const data = await res.json();
     if (data.role === "manager") {
@@ -79,6 +97,7 @@ document.getElementById("managerLoginButton").onclick = async function () {
     } else {
         alert("You do not have manager access.");
     }
+    // Displays an alert if login information is incorrect 
 } else {
     alert("Incorrect username or password.");
 }

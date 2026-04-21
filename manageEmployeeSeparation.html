@@ -1,7 +1,12 @@
 <!DOCTYPE html>
+<!--HTML and script for the Manage Employee Separation Page-->
+<!--Created by Emily Hough-->
 <html>
     <head>
+        <!--Title for the website-->
         <title>XYZ Company HR Website</title>
+
+        <!--Link to the css style sheet-->
         <link rel="stylesheet" href="csstest.css">
     </head>
 
@@ -14,6 +19,7 @@
             <p>Manage Employee Separation</p>
         </div>
  
+        <!--Creates the form to view employee-->
         <div id="viewEmployeeForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
  
             <!-- Enter ID and load employee -->
@@ -31,14 +37,16 @@
                 <strong>Employee ID:</strong> <span id="empIdDisplay">—</span>
             </div>
  
-            <!-- Termination form — hidden until loaded -->
+            <!--Form hidden until data is loaded-->
             <div id="employeeStatusFormBody" style="display:none;">
                 <label>
                     <input type="checkbox" id="terminated" name="is_terminated" value="true">
                     Is this employee terminated?
                 </label>
                 <br><br>
+                <!--Button to save changes and send the separation notification-->
                 <button onclick="submitUpdate()">Save Changes and Send Separation Notification</button>
+                <!--Warning message-->
                 <p style="color: #c0392b; font-size: 0.85em;">
                     Warning: By clicking 'Save Changes' you are permanently removing this employee from the system.
                 </p>
@@ -46,30 +54,35 @@
  
         </div>
         <script>
-            // gets employee data from database
+            // Gets employee data from database
             const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app';
  
+            // Requests the emploee ID
             async function loadEmployee() {
                 const id = document.getElementById('empId').value.trim();
                 if (!id) { alert('Please enter an Employee ID'); return; }
  
+                // Styling information 
                 const statusMsg = document.getElementById('statusMsg');
                 statusMsg.style.color = '#333';
                 statusMsg.textContent = 'Loading...';
                 document.getElementById('employeeInfo').style.display = 'none';
                 document.getElementById('employeeStatusFormBody').style.display = 'none';
  
+                // Fetches information
                 try {
                     const response = await fetch(`${API_URL}/users`);
                     const users = await response.json();
                     const employee = users.find(u => String(u.password) === String(id));
  
+                    // If no employee ID matches in the database to what was entered a message is displayed to tell the user
                     if (!employee) {
                         statusMsg.style.color = '#c0392b';
                         statusMsg.textContent = 'No employee found with that ID.';
                         return;
                     }
  
+                    // Form contents
                     document.getElementById('empName').textContent = employee.username;
                     document.getElementById('empIdDisplay').textContent = id;
                     document.getElementById('employeeInfo').style.display = 'block';
@@ -77,6 +90,7 @@
                     document.getElementById('terminated').checked = false;
                     statusMsg.textContent = '';
  
+                    // Displays an error message if it can't connect to the server
                 } catch (err) {
                     console.error(err);
                     statusMsg.style.color = '#c0392b';
@@ -84,44 +98,51 @@
                 }
             }
  
+            // Function to submit the form
             async function submitUpdate() {
                 const id = document.getElementById('empId').value.trim();
                 const isTerminated = document.getElementById('terminated').checked;
  
+                // If the checkbox is not marked when the form is submitted then an error message is displayed
                 if (!isTerminated) {
                     alert('Please check the termination box to confirm.');
                     return;
                 }
  
+                // Displays a warning message to user that you are permanantly removing the employee from the database
                 const name = document.getElementById('empName').textContent;
                 if (!confirm(`Are you sure you want to permanently remove ${name} (ID: ${id})? This cannot be undone.`)) return;
  
+                // Status message
                 const statusMsg = document.getElementById('statusMsg');
                 statusMsg.style.color = '#333';
                 statusMsg.textContent = 'Processing...';
  
+                // Deletes the employee from the database
                 try {
                     const response = await fetch(`${API_URL}/employees/${id}`, {
                         method: 'DELETE',
                     });
  
+                    // If employee is successfully deleted this informs the user
                     if (response.ok) {
                         statusMsg.style.color = 'green';
                         statusMsg.textContent = `Employee ${name} (ID: ${id}) has been successfully removed.`;
                         document.getElementById('employeeStatusFormBody').style.display = 'none';
                         document.getElementById('employeeInfo').style.display = 'none';
                         document.getElementById('empId').value = '';
+                    // If deleting the employee from the database failed it informs the user
                     } else {
                         statusMsg.style.color = '#c0392b';
                         statusMsg.textContent = 'Failed to remove employee.';
                     }
+                    // Displays an error message if it cannot connect to the server
                 } catch (err) {
                     console.error(err);
                     statusMsg.style.color = '#c0392b';
                     statusMsg.textContent = 'Error connecting to server.';
                 }
             }
-
         </script>
     </body>
 </html>

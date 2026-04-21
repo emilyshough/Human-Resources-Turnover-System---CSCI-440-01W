@@ -1,3 +1,5 @@
+// Backend of the system
+// By Emily Hough
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -19,12 +21,12 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
-// TEST ROUTE
+// Test route
 app.get('/', (req, res) => {
     res.send('API is working!');
 });
 
-// GET USERS (employee login data)
+// Get users (employee login data)
 app.get('/users', (req, res) => {
     db.query(`
         SELECT 
@@ -41,7 +43,7 @@ app.get('/users', (req, res) => {
         }
         res.json(result);
     });
-}); // 
+}); 
 
 // Login Route
 app.post("/users/login", (req, res) => {
@@ -92,7 +94,7 @@ app.post("/users/login", (req, res) => {
     );
 });const PORT = process.env.PORT || 3000;
 
-// update employee info
+// Update employee info
 app.post('/update-employee', (req, res) => {
     const {
         EmployeeID, FirstName, LastName, DOB, Address,

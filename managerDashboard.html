@@ -1,40 +1,52 @@
 <!DOCTYPE html>
+<!--HTML and script for the Manager Dashboard Page-->
+<!--Created by Emily Hough-->
 <html>
     <head>
+        <!--Title for the website-->
         <title>XYZ Company HR Website</title>
+
+        <!--Link to the CSS style sheet-->
         <link rel="stylesheet" href="csstest.css">
     </head>
     <body>
+        <!--Header for the page-->
         <div id="managerDashboardHeader">
             <p>Manager Dashboard</p>
             <p id="welcomeMessageManager"></p>
         </div>
         
+        <!--Dashboard column that holds all of the link options for an employee-->
         <div class="managerDashboardColumn">
+            <!--link to conduct exit interview-->
             <a href="exitInterview.html">
                 <div id="conductExitInterview">
                     <p>Conduct Exit Interview</p>
                 </div>
             </a>
             
+            <!--link to process offboarding-->
             <a href="processOffboarding.html">
                 <div id="processOffboarding">
                     <p>Process Offboarding</p>
                 </div>
             </a>
 
+            <!--link to manage employee separation-->
             <a href="manageEmployeeSeparation.html">
                 <div id="manageEmployeeSeparation">
                     <p>Manage Employee Separation</p>
                 </div>
             </a>
 
+            <!--link to generate turnover report-->
             <a href="turnoverReport.html">
                 <div id="generateTurnoverReport">
                     <p>Generate Turnover Report</p>
                 </div>
             </a>
 
+            <!--link to update employee records-->
             <a href="updateEmployeeRecords.html">
                 <div id="updateEmployeeRecords">
                     <p>Update Employee Records</p>
@@ -43,6 +55,8 @@
         </div>
         
     <script>
+        // Displays a tailored message for the individual employee who logged in
+        // In other words it displays the name of the employee who logged in
         const loggedInManager = sessionStorage.getItem("loggedInManager");
 
         if (!loggedInManager) {

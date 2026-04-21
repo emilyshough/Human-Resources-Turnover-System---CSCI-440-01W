@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--Title for the website-->
         <title>XYZ Company HR Website</title>
+
+        <!--Link to the css style sheet-->
         <link rel="stylesheet" href="csstest.css">
     </head>
     <body>
+        <!--Header for the page-->
         <div id="employeeDashboardHeader">
             <p>Employee Dashboard</p>
             <p id="welcomeMessageEmployee"></p>
         </div>
         
+        <!--Dashboard column that holds all of the link options for an employee-->
         <div class="employeeDashboardColumn">
 
             <!--link to updating employee information form-->
@@ -48,6 +53,8 @@
             </a>
         </div>
         <script>
+        // Displays a tailored message for the individual employee who logged in
+        // In other words it displays the name of the employee who logged in
         const loggedInEmployee = sessionStorage.getItem("loggedInEmployee");
 
         if (!loggedInEmployee) {

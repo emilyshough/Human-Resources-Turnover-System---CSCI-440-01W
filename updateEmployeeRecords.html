@@ -1,7 +1,12 @@
 <!DOCTYPE html>
+<!--HTML and script for the Process Offboarding Page-->
+<!--Created by Emily Hough-->
 <html>
     <head>
+      <!--Title for the website-->
         <title>XYZ Company HR Website</title>
+
+        <!--Link to the css style sheet-->
         <link rel="stylesheet" href="csstest.css">
     </head>
  
@@ -23,8 +28,10 @@
         <!--View update requests-->
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdftc-BGL-f7YycV6g8ShgWwsEodOhxoAnhERDloqjR5skORw/viewform?usp=header" id="viewUpdateRecordsRequest">View Update Records Requests</a>
 
+        <!--Form style-->
         <div id="updateForm" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
-                
+               
+        <!--Button to load the employee records-->
         <div style="display: flex; gap: 10px; margin-bottom: 16px;">
             <input type="text" id="empId" placeholder="Employee ID" style="flex:1; padding: 8px;">
             <button onclick="loadEmployee()">Load Record</button>
@@ -53,29 +60,35 @@
             <label>Position ID</label>
             <input type="text" id="PositionID" style="width:100%; margin-bottom:20px;"><br>
 
+            <!--Button to update the changes to the employee record-->
             <button onclick="submitUpdate()">Save Changes</button>
         </div>
+        <!--Status message styling-->
         <p id="statusMsg" style="margin-top: 12px; font-weight: bold;"></p>
         </div>
 
 <script>
-  // gets employee data from database
+  // Gets the employee data from database
   const API_URL = 'https://human-resources-turnover-system-csci-440-01w-production.up.railway.app'; 
 
+  // Loads the employee data based on the employee id that was entered
     async function loadEmployee() {
     const id = document.getElementById('empId').value.trim();
     if (!id) { alert('Please enter an Employee ID'); return; }
 
+    // Status message when loading data
     const statusMsg = document.getElementById('statusMsg');
     statusMsg.style.color = '#333';
     statusMsg.textContent = 'Loading...';
     document.getElementById('formBody').style.display = 'none';
 
+    // Fetches the data from the database
     try {
       const response = await fetch(`${API_URL}/users`);
       const users = await response.json();
       const employee = users.find(u => String(u.password) === String(id));
 
+      // If no employee records are found from the database then it displays a message
       if (!employee) {
         statusMsg.style.color = '#c0392b';
         statusMsg.textContent = 'No employee found with that ID.';
@@ -86,16 +99,19 @@
       statusMsg.textContent = '';
       document.getElementById('formBody').style.display = 'block';
 
+      // Displays an error message if it can't connect to the server
     } catch (err) {
       statusMsg.style.color = '#c0392b';
       statusMsg.textContent = 'Error connecting to server.';
     }
   }
 
+  // Updating records
   async function submitUpdate() {
     const id = document.getElementById('empId').value.trim();
     if (!id) { alert('Please enter an Employee ID'); return; }
 
+    // Fields to enter data that needs to be updated
     const payload = {
       EmployeeID: id,
       FirstName:  document.getElementById('FirstName').value,
@@ -110,19 +126,23 @@
       PositionID: document.getElementById('PositionID').value,
     };
 
+    // Status message
     const statusMsg = document.getElementById('statusMsg');
     statusMsg.style.color = '#333';
     statusMsg.textContent = 'Saving...';
 
+    // Connects information to the database
     try {
       const res = await fetch(`${API_URL}/update-employee`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      // If records are updated to the database successfully a mesaage indicating so is displayed to the user
       const data = await res.json();
       statusMsg.style.color = 'green';
       statusMsg.textContent = data.message || 'Updated successfully!';
+      // If records could not be updated to the database successfully a message indictaing so is displayed to the user
     } catch (err) {
       statusMsg.style.color = '#c0392b';
       statusMsg.textContent = 'Error: could not reach server.';
