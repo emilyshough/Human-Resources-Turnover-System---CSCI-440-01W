@@ -355,7 +355,10 @@ a {
 }
 
 /*styling for view update records request button*/
-#viewUpdateRecordsRequest {
+#viewUpdateRecordsRequest,
+#viewTrackGoals,
+#viewPerformanceRequests,
+#viewEmployeeManagerMeetingRequests {
     display: flex;
     justify-content: center;
     align-items: center;
