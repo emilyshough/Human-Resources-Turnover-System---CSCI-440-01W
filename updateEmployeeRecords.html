@@ -37,6 +37,12 @@
             <button onclick="loadEmployee()">Load Record</button>
         </div>
 
+        <!-- Employee info card — hidden until loaded -->
+        <div id="employeeInfo" style="display:none; margin-bottom: 16px; padding: 10px; background: #f2e6d5; border-radius: 4px;">
+            <strong>Name:</strong> <span id="empName">—</span><br>
+            <strong>Employee ID:</strong> <span id="empIdDisplay">—</span>
+        </div>
+
         <!--Form to update employee records-->
         <div id="formBody" style="display:none">
             <label>First Name</label>
@@ -103,6 +109,13 @@
         statusMsg.textContent = 'No employee found with that ID.';
         return;
       }
+
+      // Employee found, populate and show the info card
+      statusMsg.textContent = '';
+      document.getElementById('empName').textContent = employee.username;
+      document.getElementById('empIdDisplay').textContent = id;
+      document.getElementById('employeeInfo').style.display = 'block';
+      document.getElementById('formBody').style.display = 'block';
 
       // Employee found, form is now shown
       statusMsg.textContent = '';
