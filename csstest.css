@@ -354,7 +354,7 @@ a {
     text-align: center;             
 }
 
-/*styling for view update records request button*/
+/*styling for 'view' buttons*/
 #viewUpdateRecordsRequest,
 #viewTrackGoals,
 #viewPerformanceRequests,
@@ -373,8 +373,11 @@ a {
     color: black;
 }
 
-/*hover styling for viewUpdateRecordsRequestsButton*/
-#viewUpdateRecordsRequest:hover {
+/*hover styling for 'view' buttons*/
+#viewUpdateRecordsRequest:hover,
+#viewTrackGoals:hover,
+#viewPerformanceRequests:hover,
+#viewEmployeeManagerMeetingRequests:hover {
     background-color: rgb(240, 141, 57);
     transform: scale(1.02);
     transition: 0.2s;
